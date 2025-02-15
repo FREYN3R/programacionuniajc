@@ -48,5 +48,7 @@ public class Eje2 {
             System.out.println("Empleado " + (i + 1) + ": " + E[i]);
         }
         
+        entrada.close();
+        
     }
 }
