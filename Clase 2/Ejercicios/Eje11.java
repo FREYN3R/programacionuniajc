@@ -13,31 +13,73 @@ public class Eje11 {
         // Crear el arreglo A
         int[] A = new int[n];
         
-        // Llenar el arreglo A
-        System.out.println("\nIngrese los elementos del arreglo A:");
+        // Llenar el arreglo A con los valores ingresados
+        System.out.println("\nIngrese los elementos del arreglo:");
         for (int i = 0; i < n; i++) {
             System.out.print("A[" + i + "]: ");
             A[i] = scanner.nextInt();
         }
         
-        // Calcular el tamaño del arreglo resultante B
-        int tamanoB = (n % 2 == 0) ? n / 2 : (n / 2) + 1;
-        int[] B = new int[tamanoB];
+        // Contar elementos en cada categoría
+        int contNegativos = 0, contCeros = 0, contPositivos = 0;
         
-        // Llenar el arreglo B con las sumas de opuestos
-        for (int i = 0; i < tamanoB; i++) {
-            int opuesto = n - 1 - i;
-            if (i == opuesto) { // Elemento central (si N es impar)
-                B[i] = A[i];
+        for (int num : A) {
+            if (num < 0) {
+                contNegativos++;
+            } else if (num == 0) {
+                contCeros++;
             } else {
-                B[i] = A[i] + A[opuesto];
+                contPositivos++;
             }
         }
         
-        // Mostrar el arreglo B
-        System.out.println("\nArreglo resultante B:");
-        for (int num : B) {
-            System.out.print(num + " ");
+        // Crear los arreglos para cada categoría
+        int[] negativos = new int[contNegativos];
+        int[] ceros = new int[contCeros];
+        int[] positivos = new int[contPositivos];
+        
+        // Llenar los arreglos con los elementos correspondientes
+        int idxNeg = 0, idxCer = 0, idxPos = 0;
+        
+        for (int num : A) {
+            if (num < 0) {
+                negativos[idxNeg] = num;
+                idxNeg++;
+            } else if (num == 0) {
+                ceros[idxCer] = num;
+                idxCer++;
+            } else {
+                positivos[idxPos] = num;
+                idxPos++;
+            }
+        }
+        
+        // Mostrar los resultados
+        System.out.println("\nElementos negativos:");
+        if (contNegativos == 0) {
+            System.out.println("No hay elementos negativos.");
+        } else {
+            for (int num : negativos) {
+                System.out.print(num + " ");
+            }
+        }
+        
+        System.out.println("\n\nElementos iguales a cero:");
+        if (contCeros == 0) {
+            System.out.println("No hay ceros.");
+        } else {
+            for (int num : ceros) {
+                System.out.print(num + " ");
+            }
+        }
+        
+        System.out.println("\n\nElementos positivos:");
+        if (contPositivos == 0) {
+            System.out.println("No hay elementos positivos.");
+        } else {
+            for (int num : positivos) {
+                System.out.print(num + " ");
+            }
         }
         
         scanner.close();
