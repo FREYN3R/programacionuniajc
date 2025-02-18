@@ -33,4 +33,26 @@ public class OperacionesConArreglos {
         return a;
     }
 
+    public String nombreSueldo (String[]n, int[]s) {
+            
+        int suma = 0;
+
+        //Calcular la promedio
+        for (int i = 0; i < s.length; i++) {
+            suma += s[i];
+        }
+
+        double promedio = suma / s.length; //Pomedio sueldo
+        String cad = ""; int cont = 0;
+        for (int i = 0; i < s.length; i++) {
+            if (s[i] > promedio) {
+                cad += n[i] + "\n";
+                cont++;
+            }
+        }
+
+        return cad; // Agregar la instrucción return
+
+    }
+
 }
