@@ -25,7 +25,7 @@ public class OperacionesConArreglos {
         return promedio;
     }
 
-        public int[] llenarArregloAleatorios(int tam) {
+    public int[] llenarArregloAleatorios(int tam) {
         int[] a = new int[tam];
         for (int i = 0; i < a.length; i++) {
             a[i] = (int) (Math.random() * 100);
@@ -33,17 +33,18 @@ public class OperacionesConArreglos {
         return a;
     }
 
-    public String nombreSueldo (String[]n, int[]s) {
-            
+    public String nombreSueldo(String[] n, int[] s) {
+
         int suma = 0;
 
-        //Calcular la promedio
+        // Calcular la promedio
         for (int i = 0; i < s.length; i++) {
             suma += s[i];
         }
 
-        double promedio = suma / s.length; //Pomedio sueldo
-        String cad = ""; int cont = 0;
+        double promedio = suma / s.length; // Pomedio sueldo
+        String cad = "";
+        int cont = 0;
         for (int i = 0; i < s.length; i++) {
             if (s[i] > promedio) {
                 cad += n[i] + "\n";
