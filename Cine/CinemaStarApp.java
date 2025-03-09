@@ -5,11 +5,13 @@ import java.util.Scanner;
 public class CinemaStarApp {
     private static Cinema cinema;
     private static Scanner scanner;
+    private static Sales dailySales;
 
     public static void main(String[] args) {
         // Inicializar el cine
         cinema = new Cinema();
         scanner = new Scanner(System.in);
+        dailySales = new Sales();
         
         boolean exit = false;
         
@@ -28,6 +30,9 @@ public class CinemaStarApp {
                     handleSalesMenu();
                     break;
                 case 4:
+                    handleReportsMenu();
+                    break;
+                case 5:
                     exit = true;
                     System.out.println("¡Gracias por usar el sistema de CinemaStar!");
                     break;
@@ -45,7 +50,8 @@ public class CinemaStarApp {
         System.out.println("1. Gestión de Películas");
         System.out.println("2. Asignación de Funciones");
         System.out.println("3. Ventas de Entradas");
-        System.out.println("4. Salir");
+        System.out.println("4. Reportes y Estadísticas");
+        System.out.println("5. Salir");
         System.out.print("Seleccione una opción: ");
     }
     
@@ -311,7 +317,8 @@ public class CinemaStarApp {
         while (!back) {
             System.out.println("\n===== VENTAS DE ENTRADAS =====");
             System.out.println("1. Comprar entradas");
-            System.out.println("2. Volver al menú principal");
+            System.out.println("2. Ver entradas vendidas hoy");
+            System.out.println("3. Volver al menú principal");
             System.out.print("Seleccione una opción: ");
             
             int option = readOption();
@@ -321,6 +328,9 @@ public class CinemaStarApp {
                     sellTickets();
                     break;
                 case 2:
+                    viewSoldTickets();
+                    break;
+                case 3:
                     back = true;
                     break;
                 default:
@@ -429,6 +439,23 @@ public class CinemaStarApp {
                 totalPrice += price;
                 System.out.println("Asiento " + seatCode + " comprado por $" + price);
                 
+                // Determinar si el asiento es preferencial
+                boolean isPreferential = room.hasPreferentialSection() && row >= 'G';
+                
+                // Crear y guardar el ticket
+                Ticket ticket = new Ticket(
+                    selectedFunction.getMovie(),
+                    room,
+                    row,
+                    seatNumber,
+                    isPreferential,
+                    price,
+                    functionIndex
+                );
+                
+                // Añadir el ticket a las ventas del día
+                dailySales.addTicket(ticket);
+                
                 // Mostrar asientos actualizados
                 selectedFunction.displaySeatsMap();
             }
@@ -442,5 +469,75 @@ public class CinemaStarApp {
         
         System.out.println("\nTotal a pagar: $" + totalPrice);
         System.out.println("¡Compra realizada con éxito! Disfrute la función.");
+        
+        // Opción para imprimir los tickets
+        System.out.print("\n¿Desea imprimir los tickets? (S/N): ");
+        String printOption = scanner.nextLine();
+        if (printOption.equalsIgnoreCase("S")) {
+            int ticketCount = dailySales.getTickets().size();
+            int startIndex = ticketCount - totalPrice / 8000; // Estimación aproximada
+            
+            System.out.println("\n===== TICKETS =====");
+            for (int i = startIndex; i < ticketCount; i++) {
+                Ticket ticket = dailySales.getTickets().get(i);
+                System.out.println("\n----- TICKET #" + (i + 1) + " -----");
+                System.out.println(ticket.toString());
+                System.out.println("-------------------");
+            }
+        }
+    }
+    
+    // Ver entradas vendidas hoy
+    private static void viewSoldTickets() {
+        if (dailySales.getTicketCount() == 0) {
+            System.out.println("\nNo hay entradas vendidas hoy.");
+            return;
+        }
+        
+        System.out.println("\nENTRADAS VENDIDAS HOY: " + dailySales.getTicketCount());
+        System.out.println("TOTAL INGRESOS: $" + dailySales.getTotalSales());
+        
+        System.out.print("\n¿Desea ver el detalle de cada ticket? (S/N): ");
+        String detailOption = scanner.nextLine();
+        
+        if (detailOption.equalsIgnoreCase("S")) {
+            System.out.println("\n===== DETALLE DE TICKETS =====");
+            int counter = 1;
+            for (Ticket ticket : dailySales.getTickets()) {
+                System.out.println("\n----- TICKET #" + counter + " -----");
+                System.out.println(ticket.toString());
+                System.out.println("-------------------");
+                counter++;
+            }
+        }
+    }
+    
+    // Maneja el menú de reportes
+    private static void handleReportsMenu() {
+        boolean back = false;
+        
+        while (!back) {
+            System.out.println("\n===== REPORTES Y ESTADÍSTICAS =====");
+            System.out.println("1. Reporte de ventas del día");
+            System.out.println("2. Ventas por película");
+            System.out.println("3. Volver al menú principal");
+            System.out.print("Seleccione una opción: ");
+            
+            int option = readOption();
+            
+            switch (option) {
+                case 1:
+                    dailySales.generateSalesReport();
+                    break;
+                case 2:
+                    dailySales.getSalesByMovie();
+                    break;
+                case 3:
+                    back = true;
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente nuevamente.");
+            }
+        }
     }
 }
