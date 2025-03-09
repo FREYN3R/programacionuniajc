@@ -52,7 +52,7 @@ public class OperacionesConArreglos {
             }
         }
 
-        return cad; // Agregar la instrucción return
+        return cad; // Agregar la instrucción
 
     }
 
