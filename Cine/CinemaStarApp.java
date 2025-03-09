@@ -30,9 +30,6 @@ public class CinemaStarApp {
                     handleSalesMenu();
                     break;
                 case 4:
-                    handleReportsMenu();
-                    break;
-                case 5:
                     exit = true;
                     System.out.println("¡Gracias por usar el sistema de CinemaStar!");
                     break;
@@ -50,8 +47,7 @@ public class CinemaStarApp {
         System.out.println("1. Gestión de Películas");
         System.out.println("2. Asignación de Funciones");
         System.out.println("3. Ventas de Entradas");
-        System.out.println("4. Reportes y Estadísticas");
-        System.out.println("5. Salir");
+        System.out.println("4. Salir");
         System.out.print("Seleccione una opción: ");
     }
     
@@ -508,35 +504,6 @@ public class CinemaStarApp {
                 System.out.println(ticket.toString());
                 System.out.println("-------------------");
                 counter++;
-            }
-        }
-    }
-    
-    // Maneja el menú de reportes
-    private static void handleReportsMenu() {
-        boolean back = false;
-        
-        while (!back) {
-            System.out.println("\n===== REPORTES Y ESTADÍSTICAS =====");
-            System.out.println("1. Reporte de ventas del día");
-            System.out.println("2. Ventas por película");
-            System.out.println("3. Volver al menú principal");
-            System.out.print("Seleccione una opción: ");
-            
-            int option = readOption();
-            
-            switch (option) {
-                case 1:
-                    dailySales.generateSalesReport();
-                    break;
-                case 2:
-                    dailySales.getSalesByMovie();
-                    break;
-                case 3:
-                    back = true;
-                    break;
-                default:
-                    System.out.println("Opción no válida. Intente nuevamente.");
             }
         }
     }
