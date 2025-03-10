@@ -313,8 +313,7 @@ public class CinemaStarApp {
         while (!back) {
             System.out.println("\n===== VENTAS DE ENTRADAS =====");
             System.out.println("1. Comprar entradas");
-            System.out.println("2. Ver entradas vendidas hoy");
-            System.out.println("3. Volver al menú principal");
+            System.out.println("2. Volver al menú principal");
             System.out.print("Seleccione una opción: ");
             
             int option = readOption();
@@ -324,9 +323,6 @@ public class CinemaStarApp {
                     sellTickets();
                     break;
                 case 2:
-                    viewSoldTickets();
-                    break;
-                case 3:
                     back = true;
                     break;
                 default:
@@ -465,46 +461,5 @@ public class CinemaStarApp {
         
         System.out.println("\nTotal a pagar: $" + totalPrice);
         System.out.println("¡Compra realizada con éxito! Disfrute la función.");
-        
-        // Opción para imprimir los tickets
-        System.out.print("\n¿Desea imprimir los tickets? (S/N): ");
-        String printOption = scanner.nextLine();
-        if (printOption.equalsIgnoreCase("S")) {
-            int ticketCount = dailySales.getTickets().size();
-            int startIndex = ticketCount - totalPrice / 8000; // Estimación aproximada
-            
-            System.out.println("\n===== TICKETS =====");
-            for (int i = startIndex; i < ticketCount; i++) {
-                Ticket ticket = dailySales.getTickets().get(i);
-                System.out.println("\n----- TICKET #" + (i + 1) + " -----");
-                System.out.println(ticket.toString());
-                System.out.println("-------------------");
-            }
-        }
-    }
-    
-    // Ver entradas vendidas hoy
-    private static void viewSoldTickets() {
-        if (dailySales.getTicketCount() == 0) {
-            System.out.println("\nNo hay entradas vendidas hoy.");
-            return;
-        }
-        
-        System.out.println("\nENTRADAS VENDIDAS HOY: " + dailySales.getTicketCount());
-        System.out.println("TOTAL INGRESOS: $" + dailySales.getTotalSales());
-        
-        System.out.print("\n¿Desea ver el detalle de cada ticket? (S/N): ");
-        String detailOption = scanner.nextLine();
-        
-        if (detailOption.equalsIgnoreCase("S")) {
-            System.out.println("\n===== DETALLE DE TICKETS =====");
-            int counter = 1;
-            for (Ticket ticket : dailySales.getTickets()) {
-                System.out.println("\n----- TICKET #" + counter + " -----");
-                System.out.println(ticket.toString());
-                System.out.println("-------------------");
-                counter++;
-            }
-        }
     }
 }
