@@ -4,7 +4,7 @@ public class Cinema {
     private CinemaRoom[] rooms;
     private Movie[] movies;
     private int movieCount;
-    private static final int MAX_MOVIES = 50;  // Máximo número de películas en el repertorio
+    private static final int MAX_MOVIES = 12;  // Máximo número de películas en el repertorio
     
     public Cinema() {
         rooms = new CinemaRoom[3];
