@@ -38,7 +38,7 @@ public class EjecutarCola {
         // Mostar los elementos de la Cola
         System.out.println(numeros); //[3, 4, 5, 6, 7, 8]
  
- 
+        System.out.println(numeros.size()); //6
        
     }
 }
