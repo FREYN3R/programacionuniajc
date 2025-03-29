@@ -1,4 +1,3 @@
-// Pila.java
 import java.util.ArrayList;
 
 public class Pila<T> { // T es un tipo genérico
