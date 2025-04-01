@@ -10,5 +10,23 @@ public class Trabajador {
         this.salario = salario;
     }
 
-    
+    public String gerCedula(){
+        return cedula;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double geSalario() {
+        return salario;
+    } 
+
+    public String trabajador() {
+        return "Trabajador {cedula: " + cedula + "Nombre: " + nombre + "Salario: " + salario + "}";
+    }
+
+    public double pagar(double incremento) {
+        return salario + (salario * incremento);
+    }
 }
