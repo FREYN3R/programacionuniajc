@@ -7,6 +7,7 @@ public class EjecutarPila {
         //Creacion de la estructura Stack(Pila)
         Stack<String> nombres = new Stack<>();
 
+        //Verificar si la pila esta vacia
         System.out.println(nombres.empty()); 
 
         //Insertar elementos en la pila
