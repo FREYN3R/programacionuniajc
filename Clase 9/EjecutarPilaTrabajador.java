@@ -15,13 +15,15 @@ public class EjecutarPilaTrabajador {
         trabajadores.push(t3);
  
         //System.out.println(trabajadores);
-
+       
         System.out.println(trabajadores.size());
-
-        for (int i = 0; i < trabajadores.size(); i++){
-            System.out.println(trabajadores.elementAt(i).getNombre());
+ 
+        double inc = 0.20; //incremento del salario en un 20%
+ 
+        for(int i = 0; i < trabajadores.size(); i++){
+            System.out.println("Nombre: " + trabajadores.elementAt(i).getNombre() +
+            "Salario inicial: " + trabajadores.elementAt(i).geSalario() +
+            "Salario final: " + trabajadores.elementAt(i).pagar(inc) + "\n");
         }
-
-        
     }
 }
